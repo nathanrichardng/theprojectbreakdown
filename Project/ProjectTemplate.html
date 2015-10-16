@@ -1,0 +1,28 @@
+<template name="projects">
+	{{> addProjectForm}}
+	{{#each projects}}
+		{{> projectQuickInfo}}
+	{{/each}}
+</template>
+
+<template name="projectQuickInfo">
+  <a href="/projects/{{_id}}"><li>{{title}} - {{dueDate}}</li></a>
+</template>
+
+<template name="addProjectForm">
+	<form class="add-project">
+        <input type="text" name="title" placeholder="Project Title" />
+        <input type="text" name="description" placeholder="Project Description" />
+        <input type="date" name="dueDate">
+        <input type="submit">
+    </form>
+</template>
+
+<template name="project">
+	<h2>{{title}}</h2>
+	<hr>
+	<div>{{description}}</div>
+	<div>Due: {{dueDate}}</div>
+	{{> addCoreTaskForm}}
+	{{> coreTasks}}
+</template>
