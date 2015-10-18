@@ -1,0 +1,13 @@
+<template name="friends">
+	{{#each friends}}
+		{{> friend}}
+	{{/each}}
+</template>
+
+<template name="friend">
+	{{#each emails}}
+		<div>{{address}}</div> <!--Change this to use profile instead-->
+	{{/each}}
+	<input type="submit" value="Remove" class="remove-friend">
+</template>
+

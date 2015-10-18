@@ -22,7 +22,8 @@ if (Meteor.isServer) {
           owner: subTask.owner,
           members: []
       });
-    } 
+    }
+    //add methods to add/remove a colleague from members array 
   });
 
 }

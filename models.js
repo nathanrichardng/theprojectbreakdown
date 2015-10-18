@@ -164,7 +164,12 @@ Schema.User = new SimpleSchema({
         optional: true
     },
     colleagues: {
-        type: [Schema.User]
+        type: [Schema.User],
+        autoValue: function() {
+            if(this.isInsert) {
+                return [];
+            }
+        }
     }
 });
 

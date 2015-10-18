@@ -11,5 +11,6 @@ if (Meteor.isServer) {
             pm: currentUser
           });
       }
+      //add methods to add/remove a colleague from the members array
   });
 }

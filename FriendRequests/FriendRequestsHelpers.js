@@ -2,7 +2,24 @@ if (Meteor.isClient) {
   // This code only runs on the client
   Template.friendRequests.helpers({
     friendRequests: function() {
-    	return FriendRequests.find({});
+    	return FriendRequests.find({ to: Meteor.userId(), status: 'Pending' }, {
+        transform: function(doc){
+          var toUser = Meteor.users.findOne({ _id: doc.to });
+          var fromUser = Meteor.users.findOne({ _id: doc.from });
+
+          //change this to return user profile instead later on
+          var toUserEmail = toUser.emails[0].address;
+          var fromUserEmail = fromUser.emails[0].address;
+          var transformedDoc = {
+              to: toUserEmail,
+              from: fromUserEmail,
+              createdAt: doc.createdAt,
+              status: doc.status
+          }
+
+          return transformedDoc;
+        }
+      });
     }
   });
 
@@ -15,5 +32,19 @@ if (Meteor.isClient) {
       console.log(toUser);
   		event.target.toUser.value = "";
   	}
+  });
+
+  Template.friendRequest.events({
+    "click .accept-friendRequest": function(event) {
+      var friendRequest = this._id;
+      Meteor.call('acceptFriendRequest', friendRequest);
+    }
+  });
+
+  Template.friendRequest.events({
+    "click .reject-friendRequest": function(event) {
+      var friendRequest = this._id;
+      Meteor.call('rejectFriendRequest', friendRequest);
+    }
   });
 }
