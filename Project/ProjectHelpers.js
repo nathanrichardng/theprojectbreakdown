@@ -9,16 +9,13 @@ if (Meteor.isClient) {
   Template.addProjectForm.events({
   	"submit .add-project": function(event) {
   		event.preventDefault();
-  		var title = event.target.title.value;
-  		var description = event.target.description.value;
-  		var dueDate = event.target.dueDate.value;
-  		Projects.insert({
-  			title: title,
-  			description: description,
-  			members: [],
-  			dueDate: dueDate,
-  			tasks: []
-  		});
+  		var newProject = {
+  			title: event.target.title.value,
+  			description: event.target.description.value,
+  			dueDate: event.target.dueDate.value
+  		} 
+  		
+  		Meteor.call('addProject', newProject);
 
   		event.target.title.value = "";
   		event.target.description.value = "";

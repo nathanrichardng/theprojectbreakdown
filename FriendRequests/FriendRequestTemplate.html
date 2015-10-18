@@ -1,0 +1,22 @@
+<template name="friendRequests">
+	{{> addFriendRequestForm}}
+	{{#each friendRequests}}
+		{{> friendRequest}}
+	{{/each}}
+</template>
+
+<template name="friendRequest">
+	<ul>
+		<li>From: {{from}}</li>
+		<li>To: {{to}}</li>
+		<li>Requested: {{createdAt}}</li>
+		<li>Status: {{status}}</li>
+	</ul>
+</template>
+
+<template name="addFriendRequestForm">
+	<form class="add-friendRequest">
+        <input type="text" name="toUser" placeholder="Prospective colleague's email address" />
+        <input type="submit">
+    </form>
+</template>

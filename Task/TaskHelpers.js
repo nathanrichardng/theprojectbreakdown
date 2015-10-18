@@ -4,20 +4,16 @@ if (Meteor.isClient) {
   Template.addCoreTaskForm.events({
   	"submit .add-core-task": function(event) {
   		event.preventDefault();
-  		var title = event.target.title.value;
-  		var description = event.target.description.value;
-  		var dueDate = event.target.dueDate.value;
-      var project = this._id;
-      var owner = "replacethiswithcodelater";
-  		Tasks.insert({
-  			title: title,
-  			description: description,
-  			members: [],
-  			dueDate: dueDate,
-  			parentTask: null,
-        project: project,
-        owner: owner
-  		});
+
+      var newCoreTask = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        dueDate: event.target.dueDate.value,
+        project: this._id,
+        owner: "replacethiswithcodelater"
+      };
+
+  		Meteor.call('addCoreTask', newCoreTask);
 
   		event.target.title.value = "";
   		event.target.description.value = "";
@@ -33,21 +29,17 @@ if (Meteor.isClient) {
   Template.addSubTaskForm.events({
     "submit .add-sub-task": function(event) {
       event.preventDefault();
-      var title = event.target.title.value;
-      var description = event.target.description.value;
-      var dueDate = event.target.dueDate.value;
-      var project = this.project;
-      var owner = "replacethiswithcodelater";
-      var parentTask = this._id;
-      Tasks.insert({
-        title: title,
-        description: description,
-        members: [],
-        dueDate: dueDate,
-        parentTask: parentTask,
-        project: project,
-        owner: owner
-      });
+
+      var newSubTask = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        dueDate: event.target.dueDate.value,
+        project: this.project,
+        owner: "replacethiswithcodelater",
+        parentTask: this._id
+      };
+
+      Meteor.call('addSubTask', newSubTask);
 
       event.target.title.value = "";
       event.target.description.value = "";
@@ -56,7 +48,6 @@ if (Meteor.isClient) {
 
   Template.subTasks.helpers({
     subTasks: function() {
-      console.log(this._id);
       return Tasks.find({ parentTask: this._id});
     }
   });
