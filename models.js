@@ -31,6 +31,14 @@ Schema.Task = new SimpleSchema({
     },
     project: {
         type: Schema.Project
+    },
+    removed: {
+        type: Boolean,
+        autoValue: function() {
+            if(this.isInsert) {
+                return false;
+            }
+        }
     }
 });
 
@@ -58,6 +66,14 @@ Schema.Project = new SimpleSchema({
     },
     pm: {
         type: Schema.User
+    },
+    removed: {
+        type: Boolean,
+        autoValue: function() {
+            if(this.isInsert) {
+                return false;
+            }
+        }
     }
 });
 

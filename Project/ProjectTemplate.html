@@ -21,12 +21,13 @@
 <template name="project">
 	{{> addMembersForm}}
 	<h2>{{title}}</h2>
+	<input type="submit" value="Remove" class="remove-project">
 	<hr>
 	<div>{{description}}</div>
 	<div>Due: {{dueDate}}</div>
 	<!--refactor to its own template later-->
 	{{#each members}}
-		<div>{{this}}</div>
+		{{> member}}
 	{{/each}}
 	{{> addCoreTaskForm}}
 	{{> coreTasks}}
@@ -34,15 +35,24 @@
 
 <template name="addMembersForm">
 	<form class="add-members">
-        <select multiple name="members">
-        	{{#each colleagues}}
-        		<option value="{{_id}}">
-	        		{{#each emails}}
-						{{address}}
-	        		{{/each}}
-        		</option>
-        	{{/each}}
-        </select>
+        {{> selectColleagues}}
         <input type="Submit" value="Add Members">
     </form>
+</template>
+
+<template name="selectColleagues">
+	<select multiple name="members">
+    	{{#each colleagues}}
+    		<option value="{{_id}}">
+        		{{#each emails}}
+					{{address}}
+        		{{/each}}
+    		</option>
+    	{{/each}}
+    </select>
+</template>
+
+<template name="member">
+	<div>{{member}}</div>
+	<input type="submit" value="Remove" class="remove-member">
 </template>

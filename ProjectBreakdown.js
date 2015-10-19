@@ -9,12 +9,12 @@ if (Meteor.isServer) {
 
 
   Meteor.publish('projects', function() {
-    return Projects.find({members: this.userId}); //add filtering for user permissions later
+    return Projects.find({members: this.userId, removed: false}); //add filtering for user permissions later
   });
 
   Meteor.publish('tasks', function() {
     return Tasks.find({
-
+      removed: false
     });
   });
 

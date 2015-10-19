@@ -11,7 +11,17 @@ if (Meteor.isServer) {
             pm: currentUser
           });
       },
-      'addMember': function(projectId, memberId) {
+      'removeProject': function(projectId) {
+        var currentUser = Meteor.userId();
+        Projects.update({
+          _id: projectId,
+          pm: currentUser
+        }, 
+        {
+          $set: { removed: true }
+        });
+      },
+      'addMemberToProject': function(projectId, memberId) {
         var isColleague = Meteor.users.findOne({
           _id: this.userId,
           colleagues: memberId
@@ -26,7 +36,20 @@ if (Meteor.isServer) {
             $addToSet: { members: memberId }
           });
         }
+      },
+      'removeMemberFromProject': function(projectId, memberId) {
+        //dont let pm remove themself from project.
+        //need to make another method elsewhere to allow them to reassign a new pm
+        if(memberId == this.userId) {
+          return false;
+        }
+        Projects.update({ 
+          _id: projectId, 
+          pm: this.userId 
+        },
+        {
+          $pull: { members: memberId }
+        });
       }
-      //add methods to add/remove a colleague from the members array
   });
 }
