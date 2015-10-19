@@ -19,10 +19,30 @@
 </template>
 
 <template name="project">
+	{{> addMembersForm}}
 	<h2>{{title}}</h2>
 	<hr>
 	<div>{{description}}</div>
 	<div>Due: {{dueDate}}</div>
+	<!--refactor to its own template later-->
+	{{#each members}}
+		<div>{{this}}</div>
+	{{/each}}
 	{{> addCoreTaskForm}}
 	{{> coreTasks}}
+</template>
+
+<template name="addMembersForm">
+	<form class="add-members">
+        <select multiple name="members">
+        	{{#each colleagues}}
+        		<option value="{{_id}}">
+	        		{{#each emails}}
+						{{address}}
+	        		{{/each}}
+        		</option>
+        	{{/each}}
+        </select>
+        <input type="Submit" value="Add Members">
+    </form>
 </template>
