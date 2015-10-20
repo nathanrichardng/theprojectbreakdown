@@ -2,7 +2,13 @@ if (Meteor.isClient) {
   // This code only runs on the client
   Template.projects.helpers({
     projects: function() {
-    	return Projects.find({});
+    	return Projects.find({}, {
+        transform: function(doc) {
+          var newDoc = doc;
+          newDoc.dueDate = newDoc.dueDate.toDateString();
+          return doc;
+        }
+      });
     }
   });
 

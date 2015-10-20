@@ -9,7 +9,7 @@ if (Meteor.isServer) {
           parentTask: null,
           project: coreTask.project,
           owner: Meteor.userId(),
-          members: []
+          members: [Meteor.userId()]
       });
     },
     'addSubTask': function(subTask) {
@@ -20,7 +20,7 @@ if (Meteor.isServer) {
           parentTask: subTask.parentTask,
           project: subTask.project,
           owner: Meteor.userId(),
-          members: []
+          members: [Meteor.userId()]
       });
     },
     'removeTask': function(taskId) {

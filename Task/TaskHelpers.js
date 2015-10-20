@@ -21,7 +21,13 @@ if (Meteor.isClient) {
 
   Template.coreTasks.helpers({
     coreTasks: function() {
-      return Tasks.find({ parentTask: null, project: this._id });
+      return Tasks.find({ parentTask: null, project: this._id }, {
+        transform: function(doc) {
+          var newDoc = doc;
+          newDoc.dueDate = newDoc.dueDate.toDateString();
+          return doc;
+        }
+      });
     }
   });
 
@@ -75,7 +81,13 @@ if (Meteor.isClient) {
 
   Template.subTasks.helpers({
     subTasks: function() {
-      return Tasks.find({ parentTask: this._id});
+      return Tasks.find({ parentTask: this._id}, {
+        transform: function(doc) {
+          var newDoc = doc;
+          newDoc.dueDate = newDoc.dueDate.toDateString();
+          return doc;
+        }
+      });
     }
   });
 

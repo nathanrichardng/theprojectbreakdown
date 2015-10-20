@@ -6,6 +6,12 @@ Router.route('/Projects/:ProjectId', {
 	},
 	data: function() {
 		var projectId = this.params.ProjectId
-		return Projects.findOne({ _id:projectId });
+		return Projects.findOne({ _id:projectId }, {
+	        transform: function(doc) {
+	          var newDoc = doc;
+	          newDoc.dueDate = newDoc.dueDate.toDateString();
+	          return doc;
+	        }
+      	});
 	}
 });

@@ -1,58 +1,94 @@
 <template name="addCoreTaskForm">
 	<form class="add-core-task">
-        <input type="text" name="title" placeholder="Task Title" />
-        <input type="text" name="description" placeholder="Task Description" />
-        <input type="date" name="dueDate">
-        <input type="submit">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskTitle">Title</span>
+			<input type="text" name="title" placeholder="What is the task called?" class="form-control" aria-describedby="taskTitle" />
+		</div>
+        <div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskDescription">Description</span>
+			<input type="text" name="description" placeholder="Short description of task" class="form-control" aria-describedby="taskDescription" />
+		</div>
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskDueDate">Completion Date</span>
+			<input type="date" name="dueDate" class="form-control" aria-describedby="taskDueDate">
+		</div>
+        <div class="input-group col-xs-12">
+        	<input type="submit" class="btn btn-info col-xs-12">
+        </div>
     </form>
 </template>
 
 
 <template name="coreTasks">
-	{{#each coreTasks}}
-		{{> coreTask}}
-	{{/each}}
+	<div class="list-group">
+		{{#each coreTasks}}
+			{{> coreTask}}
+		{{/each}}
+	</div>
 </template>
 
 <template name="coreTask">
-	<a href="/tasks/{{_id}}"><h2>{{title}}</h2></a>
-	<input type="submit" value="Remove" class="remove-task">
-	<hr>
-	<div>{{description}}</div>
-	<div>Due: {{dueDate}}</div>
+	<div class="list-group-item">
+		<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
+		<a href="/tasks/{{_id}}">
+			<h4 class="list-group-item-heading">{{title}}</h4>
+			<p class="list-group-item-text">Due {{dueDate}}</p>
+		</a>
+	</div>
 </template>
 
 <template name="task">
-	<h2>{{title}}</h2>
-	<input type="submit" value="Remove" class="remove-task">
+	<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
+	<h2>{{title}} - Due {{dueDate}}</h2>
 	<hr>
-	<div>{{description}}</div>
-	<div>Due: {{dueDate}}</div>
-	{{> members}}
-	{{> addSubTaskForm}}
-	{{>subTasks}}
+	<div class="col-md-12 well">
+		<p>{{description}}</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Sub Tasks</h3>
+		{{> addSubTaskForm}}
+		{{> subTasks}}
+	</div>
+	<div class="col-md-6 well">
+		{{> members}}
+	</div>
 </template>
 
 
 <template name="addSubTaskForm">
 	<form class="add-sub-task">
-        <input type="text" name="title" placeholder="Task Title" />
-        <input type="text" name="description" placeholder="Task Description" />
-        <input type="date" name="dueDate">
-        <input type="submit">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskTitle">Title</span>
+			<input type="text" name="title" placeholder="What is the task called?" class="form-control" aria-describedby="taskTitle" />
+		</div>
+        <div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskDescription">Description</span>
+			<input type="text" name="description" placeholder="Short description of task" class="form-control" aria-describedby="taskDescription" />
+		</div>
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="taskDueDate">Completion Date</span>
+			<input type="date" name="dueDate" class="form-control" aria-describedby="taskDueDate">
+		</div>
+        <div class="input-group col-xs-12">
+        	<input type="submit" class="btn btn-info col-xs-12">
+        </div>
     </form>
 </template>
 
 <template name="subTasks">
-	{{#each subTasks}}
-		{{> subTask}}
-	{{/each}}
+	<div class="list-group">
+		{{#each subTasks}}
+			{{> subTask}}
+		{{/each}}
+	</div>
 </template>
 
 <template name="subTask">
-	<a href="/tasks/{{_id}}"><h2>{{title}}</h2></a>
-	<input type="submit" value="Remove" class="remove-task">
-	<hr>
-	<div>{{description}}</div>
-	<div>Due: {{dueDate}}</div>
+	<div class="list-group-item">
+		<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
+		<a href="/tasks/{{_id}}">
+			<h4 class="list-group-item-heading">{{title}}</h4>
+			<p class="list-group-item-text">Due {{dueDate}}</p>
+		</a>
+	</div>
 </template>
