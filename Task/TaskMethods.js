@@ -8,7 +8,7 @@ if (Meteor.isServer) {
           dueDate: coreTask.dueDate,
           parentTask: null,
           project: coreTask.project,
-          owner: coreTask.owner,
+          owner: Meteor.userId(),
           members: []
       });
     },
@@ -19,7 +19,7 @@ if (Meteor.isServer) {
           dueDate: subTask.dueDate,
           parentTask: subTask.parentTask,
           project: subTask.project,
-          owner: subTask.owner,
+          owner: Meteor.userId(),
           members: []
       });
     },
@@ -42,17 +42,19 @@ if (Meteor.isServer) {
           colleagues: memberId
         });
 
-        if (isColleague) {
+        var task = Tasks.findOne({ _id: taskId });
+        var project = Projects.findOne({ _id: task.project });
+
+        if (isColleague && (task.owner == Meteor.userId() || project.pm == Meteor.userId() ) ) {
           Tasks.update({ 
-            _id: taskId, 
-            owner: this.userId 
+            _id: taskId
           },
           {
             $addToSet: { members: memberId }
           });
         }
       },
-      'removeMemberFromTask': function(projectId, memberId) {
+      'removeMemberFromTask': function(taskId, memberId) {
         //dont let pm remove themself from project.
         //need to make another method elsewhere to allow them to reassign a new pm
         if(memberId == this.userId) {
@@ -65,7 +67,7 @@ if (Meteor.isServer) {
 
         if(project.pm == Meteor.userId() || task.owner == Meteor.userId()) {
           Tasks.update({ 
-            _id: projectId
+            _id: taskId
           },
           {
             $pull: { members: memberId }

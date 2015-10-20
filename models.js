@@ -17,6 +17,10 @@ Schema.Task = new SimpleSchema({
         label: "Description",
         max: 1000
     },
+    members: {
+        type: [Schema.User],
+        label: "Members"
+    },
     owner: {
         type: String,
         label: "Task Owner"

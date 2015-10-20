@@ -1,8 +1,14 @@
 <template name="projects">
-	{{> addProjectForm}}
-	{{#each projects}}
-		{{> projectQuickInfo}}
-	{{/each}}
+	<div class="row">
+		<div class="col-md-7">
+			{{> addProjectForm}}
+		</div>
+		<div class="col-md-5">
+			{{#each projects}}
+				{{> projectQuickInfo}}
+			{{/each}}
+		</div>
+	</div>
 </template>
 
 <template name="projectQuickInfo">
@@ -11,26 +17,42 @@
 
 <template name="addProjectForm">
 	<form class="add-project">
-        <input type="text" name="title" placeholder="Project Title" />
-        <input type="text" name="description" placeholder="Project Description" />
-        <input type="date" name="dueDate">
-        <input type="submit">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="title">Title</span>
+			<input type="text" name="title" placeholder="Project Title" class="form-control" aria-describedby="title" />
+		</div>
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="targetDate">Target Date</span>
+			<input type="date" name="dueDate" class="form-control" aria-describedby="targetDate">
+		</div>
+		<div class="input-group col-xs-12">
+			<textarea class="form-control" name="description" placeholder="Project Description" rows="5"></textarea>
+		</div>
+		<div class="input-group col-xs-12">
+			<button type="submit" class="btn btn-info col-md-12" value="Add Project">Add Project</button>
+		</div>
     </form>
 </template>
 
 <template name="project">
-	{{> addMembersForm}}
 	<h2>{{title}}</h2>
 	<input type="submit" value="Remove" class="remove-project">
 	<hr>
 	<div>{{description}}</div>
 	<div>Due: {{dueDate}}</div>
+	{{> members}}
+	<hr>
 	<!--refactor to its own template later-->
+	
+	{{> addCoreTaskForm}}
+	{{> coreTasks}}
+</template>
+
+<template name="members">
+	{{> addMembersForm}}
 	{{#each members}}
 		{{> member}}
 	{{/each}}
-	{{> addCoreTaskForm}}
-	{{> coreTasks}}
 </template>
 
 <template name="addMembersForm">

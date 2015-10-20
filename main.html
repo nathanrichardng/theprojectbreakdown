@@ -1,0 +1,37 @@
+<template name="main">
+  <div class='container'>
+    <!--meteor-include src="loginButtons"></meteor-include-->
+    <div class="row">
+      <nav class='navbar navbar-default'>
+        <div class='container-fluid'>
+          <div class='navbar-header'>
+            <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#main-nav'>
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ProjectBreakdown</a>
+          </div>
+          <!--Collapsable area-->
+          <div class='collapse navbar-collapse' id='main-nav'>
+            <ul class='nav navbar-nav'>
+              <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="/projects"><i class="fa fa-map-marker"></i> Projects</a></li>
+              <li><a href="/friendRequests"><i class="fa fa-calendar-o"></i> Contact requests</a></li>
+              <li><a href="/friends"><i class="fa fa-line-chart"></i> Colleagues</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{> loginButtons}} <!-- here -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+      <div ui-view></div>
+      
+  </div>
+  <div class='container'>
+    {{> yield}}
+  </div>
+</template>
