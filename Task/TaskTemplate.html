@@ -40,6 +40,12 @@
 <template name="task">
 	<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
 	<h2>{{title}} - Due {{dueDate}}</h2>
+	<select>
+		<option selected="{{isEqual status 'In progress'}}">In progress</option>
+		<option selected="{{isEqual status 'At risk'}}">At risk</option>
+		<option selected="{{isEqual status 'Pending information'}}">Pending information</option>
+		<option selected="{{isEqual status 'Complete'}}">Complete</option>
+	</select>
 	<hr>
 	<div class="col-md-12 well">
 		<p>{{description}}</p>
@@ -47,6 +53,7 @@
 	<div class="col-md-6">
 		<h3>Sub Tasks</h3>
 		{{> addSubTaskForm}}
+		<hr>
 		{{> subTasks}}
 	</div>
 	<div class="col-md-6 well">

@@ -43,6 +43,16 @@ Schema.Task = new SimpleSchema({
                 return false;
             }
         }
+    },
+    status: {
+        type: String,
+        label: "Status",
+        allowedValues: ['In progress', 'At risk', 'Pending information', 'Complete'],
+        autoValue: function() {
+            if(this.isInsert) {
+                return 'In progress';
+            }
+        }
     }
 });
 
@@ -76,6 +86,16 @@ Schema.Project = new SimpleSchema({
         autoValue: function() {
             if(this.isInsert) {
                 return false;
+            }
+        }
+    },
+    status: {
+        type: String,
+        label: "Status",
+        allowedValues: ['In progress', 'At risk', 'Complete'],
+        autoValue: function() {
+            if(this.isInsert) {
+                return 'In progress';
             }
         }
     }
