@@ -30,7 +30,7 @@ if (Meteor.isClient) {
       event.preventDefault();
       var projectId = this._id;
       console.log(projectId);
-      selected = event.target.members.selectedOptions;
+      var selected = event.target.members.selectedOptions;
       for (var i = 0; i< selected.length; i++) {
         var member = selected[i].value;
         console.log(member);
@@ -38,6 +38,13 @@ if (Meteor.isClient) {
         console.log("user", Meteor.user());
         Meteor.call('addMemberToProject', projectId, member);
       }
+    },
+    "change .project-status": function(event) {
+      event.preventDefault();
+      var projectId = this._id;
+      var newStatus = event.target.value;
+      console.log(newStatus);
+      Meteor.call('updateProjectStatus', projectId, newStatus);
     }
   })
 

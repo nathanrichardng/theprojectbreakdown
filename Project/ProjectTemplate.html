@@ -13,10 +13,12 @@
 </template>
 
 <template name="projectQuickInfo">
-	<a href="/projects/{{_id}}" class="list-group-item">
-		<h4 class="list-group-item-heading">{{title}}</h4>
-		<p class="list-group-item-text">Due {{dueDate}}</p>
-	</a>
+	<div class="list-group-item {{classFor status}}">
+		<a href="/projects/{{_id}}">
+			<h4 class="list-group-item-heading">{{title}}</h4>
+			<p class="list-group-item-text">Due {{dueDate}}</p>
+		</a>
+	</div>
 </template>
 
 <template name="addProjectForm">
@@ -44,7 +46,7 @@
 <template name="project">
 	<span type="submit" value="Remove" class="remove-project glyphicon glyphicon-remove pull-right text-danger"></span>
 	<h2>{{title}} - Due {{dueDate}}</h2>
-	<select>
+	<select class="project-status">
 		<option selected="{{isEqual status 'In progress'}}">In progress</option>
 		<option selected="{{isEqual status 'At risk'}}">At risk</option>
 		<option selected="{{isEqual status 'Complete'}}">Complete</option>

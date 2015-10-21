@@ -28,7 +28,7 @@
 </template>
 
 <template name="coreTask">
-	<div class="list-group-item">
+	<div class="list-group-item {{classFor status}}">
 		<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
 		<a href="/tasks/{{_id}}">
 			<h4 class="list-group-item-heading">{{title}}</h4>
@@ -40,7 +40,7 @@
 <template name="task">
 	<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
 	<h2>{{title}} - Due {{dueDate}}</h2>
-	<select>
+	<select class="task-status">
 		<option selected="{{isEqual status 'In progress'}}">In progress</option>
 		<option selected="{{isEqual status 'At risk'}}">At risk</option>
 		<option selected="{{isEqual status 'Pending information'}}">Pending information</option>
@@ -91,7 +91,7 @@
 </template>
 
 <template name="subTask">
-	<div class="list-group-item">
+	<div class="list-group-item {{classFor status}}">
 		<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
 		<a href="/tasks/{{_id}}">
 			<h4 class="list-group-item-heading">{{title}}</h4>

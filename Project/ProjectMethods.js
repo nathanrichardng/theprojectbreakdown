@@ -50,6 +50,16 @@ if (Meteor.isServer) {
         {
           $pull: { members: memberId }
         });
+      },
+      'updateProjectStatus': function(projectId, newStatus) {
+        var currentUser = Meteor.userId();
+        Projects.update({
+          _id: projectId,
+          pm: currentUser
+        },
+        {
+          $set: { status: newStatus }
+        });
       }
   });
 }

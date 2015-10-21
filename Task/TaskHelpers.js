@@ -138,6 +138,13 @@ if (Meteor.isClient) {
         console.log("user", Meteor.user());
         Meteor.call('addMemberToTask', taskId, member);
       }
+    },
+    "change .task-status": function(event) {
+      event.preventDefault();
+      var taskId = this._id;
+      var newStatus = event.target.value;
+      console.log(newStatus);
+      Meteor.call('updateTaskStatus', taskId, newStatus);
     }
   });
 

@@ -73,8 +73,22 @@ if (Meteor.isServer) {
             $pull: { members: memberId }
           });
         }
+      },
+      'updateTaskStatus': function(taskId, newStatus) {
+
+        var task = Tasks.findOne({ _id: taskId});
+        var projectId = task.project;
+        var project = Projects.findOne({ _id: projectId});
+
+        if(project.pm == Meteor.userId() || task.owner == Meteor.userId()) {
+          Tasks.update({ 
+            _id: taskId
+          },
+          {
+            $set: { status: newStatus }
+          });
+        }
       }
-    //add methods to add/remove a colleague from members array 
   });
 
 }
