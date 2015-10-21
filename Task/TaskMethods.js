@@ -27,9 +27,12 @@ if (Meteor.isServer) {
       var task = Tasks.findOne({ _id: taskId});
       var projectId = task.project;
       var project = Projects.findOne({ _id: projectId});
-      if (project.pm == Meteor.userId()){
+      if (project.pm == Meteor.userId() || task.owner == Meteor.userId()){
         Tasks.update({
-          _id: taskId
+          $or: [ 
+            { _id: taskId },
+            { parentTask: taskId }
+          ]
         },
         {
           $set: { removed: true }

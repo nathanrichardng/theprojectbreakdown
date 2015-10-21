@@ -16,3 +16,12 @@ Blaze.registerHelper('classFor', function (value) {
     		return "";
     }
 });
+
+if (Meteor.isClient) {
+  // This code only runs on the client
+  Template.main.helpers({
+    numberOfFriendRequests: function() {
+        return FriendRequests.find({ to: Meteor.userId(), status: 'Pending' }).count();
+    }
+  });
+}
