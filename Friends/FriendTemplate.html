@@ -1,13 +1,19 @@
 <template name="friends">
-	{{#each friends}}
-		{{> friend}}
-	{{/each}}
+	<h3>Colleagues: </h3>
+	<hr>
+	<div class="list-group">
+		{{#each friends}}
+			{{> friend}}
+		{{/each}}
+	</div>
 </template>
 
 <template name="friend">
-	{{#each emails}}
-		<div>{{address}}</div> <!--Change this to use profile instead-->
-	{{/each}}
-	<input type="submit" value="Remove" class="remove-friend">
+	<div class="list-group-item">
+		<span type="submit" value="Remove" class="remove-friend glyphicon glyphicon-remove pull-right text-danger"></span>
+		{{#each emails}}
+				<div>{{address}}</div>
+		{{/each}}
+	</div> <!--Change this to use profile instead-->
 </template>
 

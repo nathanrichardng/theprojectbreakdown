@@ -38,8 +38,6 @@ if (Meteor.isClient) {
     },
     "click .remove-member": function(event) {
       event.preventDefault();
-      console.log(Template.parentData());
-      console.log(this);
       var taskId = Template.parentData()._id;
       var memberId = this.toString();
       Meteor.call('removeMemberFromTask', taskId, memberId);
@@ -47,13 +45,9 @@ if (Meteor.isClient) {
     "submit .add-members": function(event) {
       event.preventDefault();
       var taskId = this._id;
-      console.log(taskId);
       selected = event.target.members.selectedOptions;
       for (var i = 0; i< selected.length; i++) {
         var member = selected[i].value;
-        console.log(member);
-        console.log(taskId);
-        console.log("user", Meteor.user());
         Meteor.call('addMemberToTask', taskId, member);
       }
     }
@@ -68,10 +62,9 @@ if (Meteor.isClient) {
         description: event.target.description.value,
         dueDate: event.target.dueDate.value,
         project: this.project,
-        owner: "replacethiswithcodelater",
+        owner: Meteor.userId(),
         parentTask: this._id
       };
-
       Meteor.call('addSubTask', newSubTask);
 
       event.target.title.value = "";
@@ -86,14 +79,12 @@ if (Meteor.isClient) {
   });
 
   Template.subTask.events({
-    "click .remove-task": function(event) {
+    "click .remove-sub-task": function(event) {
       var taskId = this._id;
       Meteor.call('removeTask', taskId);
     },
     "click .remove-member": function(event) {
       event.preventDefault();
-      console.log(Template.parentData());
-      console.log(this);
       var taskId = Template.parentData()._id;
       var memberId = this.toString();
       Meteor.call('removeMemberFromTask', taskId, memberId);
@@ -101,13 +92,9 @@ if (Meteor.isClient) {
     "submit .add-members": function(event) {
       event.preventDefault();
       var taskId = this._id;
-      console.log(taskId);
       selected = event.target.members.selectedOptions;
       for (var i = 0; i< selected.length; i++) {
         var member = selected[i].value;
-        console.log(member);
-        console.log(taskId);
-        console.log("user", Meteor.user());
         Meteor.call('addMemberToTask', taskId, member);
       }
     }
@@ -120,8 +107,6 @@ if (Meteor.isClient) {
     },
     "click .remove-member": function(event) {
       event.preventDefault();
-      console.log(Template.parentData());
-      console.log(this);
       var taskId = Template.parentData()._id;
       var memberId = this.toString();
       Meteor.call('removeMemberFromTask', taskId, memberId);
@@ -129,7 +114,6 @@ if (Meteor.isClient) {
     "submit .add-members": function(event) {
       event.preventDefault();
       var taskId = this._id;
-      console.log("task", this);
       selected = event.target.members.selectedOptions;
       for (var i = 0; i< selected.length; i++) {
         var member = selected[i].value;
@@ -143,7 +127,6 @@ if (Meteor.isClient) {
       event.preventDefault();
       var taskId = this._id;
       var newStatus = event.target.value;
-      console.log(newStatus);
       Meteor.call('updateTaskStatus', taskId, newStatus);
     }
   });

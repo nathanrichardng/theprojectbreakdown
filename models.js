@@ -53,6 +53,14 @@ Schema.Task = new SimpleSchema({
                 return 'In progress';
             }
         }
+    },
+    numberOfSubTasks: {
+        type: Number,
+        autoValue: function() {
+            if(this.isInsert) {
+                return 0;
+            }
+        }
     }
 });
 

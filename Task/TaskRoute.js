@@ -6,6 +6,7 @@ Router.route('/Tasks/:TaskId', {
 	        transform: function(doc) {
 	          var newDoc = doc;
 	          newDoc.dueDate = newDoc.dueDate.toDateString();
+	          console.log("doc", doc, "newdoc", newDoc);
 	          return newDoc;
 	        }
 	    });

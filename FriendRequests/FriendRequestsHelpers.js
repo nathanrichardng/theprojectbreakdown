@@ -13,10 +13,31 @@ if (Meteor.isClient) {
           var transformedDoc = {
               to: toUserEmail,
               from: fromUserEmail,
-              createdAt: doc.createdAt,
+              createdAt: doc.createdAt.toDateString(),
               status: doc.status
           }
+          return transformedDoc;
+        }
+      });
+    }
+  });
 
+  Template.sentFriendRequests.helpers({
+    sentFriendRequests: function() {
+      return FriendRequests.find({ from: Meteor.userId(), status: 'Pending' }, {
+        transform: function(doc){
+          var toUser = Meteor.users.findOne({ _id: doc.to });
+          var fromUser = Meteor.users.findOne({ _id: doc.from });
+
+          //change this to return user profile instead later on
+          var toUserEmail = toUser.emails[0].address;
+          var fromUserEmail = fromUser.emails[0].address;
+          var transformedDoc = {
+              to: toUserEmail,
+              from: fromUserEmail,
+              createdAt: doc.createdAt.toDateString(),
+              status: doc.status
+          }
           return transformedDoc;
         }
       });

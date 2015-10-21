@@ -13,6 +13,7 @@ if (Meteor.isServer) {
       });
     },
     'addSubTask': function(subTask) {
+      //insert new subtask
       Tasks.insert({
           title: subTask.title,
           description: subTask.description,
@@ -22,12 +23,15 @@ if (Meteor.isServer) {
           owner: Meteor.userId(),
           members: [Meteor.userId()]
       });
+      //increment numberOfSubtasks on original task
+      Tasks.update({ _id: subTask.parentTask }, { $inc: { numberOfSubTasks: 1 } });
     },
     'removeTask': function(taskId) {
       var task = Tasks.findOne({ _id: taskId});
       var projectId = task.project;
       var project = Projects.findOne({ _id: projectId});
       if (project.pm == Meteor.userId() || task.owner == Meteor.userId()){
+        //update task and all subTasks as removed
         Tasks.update({
           $or: [ 
             { _id: taskId },
@@ -36,7 +40,12 @@ if (Meteor.isServer) {
         },
         {
           $set: { removed: true }
+        },
+        {
+          multi: true
         });
+        //decrement numberOfSubtasks on parent task
+        Tasks.update({ _id: task.parentTask }, { $inc: { numberOfSubTasks: -1 } });
       }
     },
       'addMemberToTask': function(taskId, memberId) {

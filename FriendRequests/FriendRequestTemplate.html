@@ -1,24 +1,58 @@
 <template name="friendRequests">
-	{{> addFriendRequestForm}}
-	{{#each friendRequests}}
-		{{> friendRequest}}
-	{{/each}}
-</template>
-
-<template name="friendRequest">
-	<ul>
-		<li>From: {{from}}</li>
-		<li>To: {{to}}</li>
-		<li>Requested: {{createdAt}}</li>
-		<li>Status: {{status}}</li>
-		<input type="submit" value="Accept" class="accept-friendRequest">
-		<input type="submit" value="Reject" class="reject-friendRequest">
-	</ul>
+	<div class="col-md-5 list-group">
+		<h4>Pending Requests:</h4>
+		<div class="well">
+			{{#each friendRequests}}
+				{{> friendRequest}}
+			{{/each}}
+		</div>
+	</div>
+	<div class="col-md-5 col-md-offset-1">
+		<div class="col-xs-12">
+			{{> addFriendRequestForm}}
+		</div>
+		<div class="col-xs-12 list-group sent-requests">
+			<h4>Sent Requests</h4>
+			<div class="sent-request">
+				{{> sentFriendRequests}}
+			</div>
+		</div>
+	</div>
+	
 </template>
 
 <template name="addFriendRequestForm">
+	<h4>Add New Contact</h4>
 	<form class="add-friendRequest">
-        <input type="text" name="toUser" placeholder="Prospective colleague's email address" />
-        <input type="submit">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="emailAddress">E-mail</span>
+			<input type="text" name="toUser" placeholder="Prospective colleague's email address" class="form-control" aria-describedby="taskTitle" />
+		</div>
+        <div class="input-group col-xs-12">
+        	<input type="submit" class="btn btn-info col-xs-12">
+        </div>
     </form>
+</template>
+
+<template name="friendRequest">
+	<div class="list-group-item">
+		<p class="list-group-item-heading"><strong>{{from}}</strong>}</p>
+		<p class="list-group-item-text">Requested on {{createdAt}}</p>
+		<hr>
+		<input type="submit" value="Accept" class="accept-friendRequest btn btn-sm btn-success">
+		<input type="submit" value="Reject" class="reject-friendRequest btn btn-sm btn-danger">
+	</div>
+</template>
+
+<template name="sentFriendRequests">
+	{{#each sentFriendRequests}}
+		{{> sentFriendRequest}}
+	{{/each}}
+</template>
+
+<template name="sentFriendRequest">
+	<div class="list-group-item">
+		<p class="list-group-item-heading"><strong>{{to}}</strong>}</p>
+		<p class="list-group-item-text">Requested on {{createdAt}}</p>
+	</div>
 </template>

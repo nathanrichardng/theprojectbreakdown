@@ -13,7 +13,6 @@ if (Meteor.isServer) {
             ] })) {
             return false;
           }
-
           var createdAt = new Date();
 
           var friendRequest = {
