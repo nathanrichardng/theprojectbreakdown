@@ -8,11 +8,11 @@ if (Meteor.isClient) {
           var fromUser = Meteor.users.findOne({ _id: doc.from });
 
           //change this to return user profile instead later on
-          var toUserEmail = toUser.emails[0].address;
-          var fromUserEmail = fromUser.emails[0].address;
+          var toUserName = toUser.profile.firstName + " " + toUser.profile.lastName + " (" + toUser.emails[0].address + ")";
+          var fromUserName = fromUser.profile.firstName + " " + fromUser.profile.lastName + " (" + fromUser.emails[0].address + ")";
           var transformedDoc = {
-              to: toUserEmail,
-              from: fromUserEmail,
+              to: toUserName,
+              from: fromUserName,
               createdAt: doc.createdAt.toDateString(),
               status: doc.status
           }

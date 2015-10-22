@@ -39,7 +39,7 @@
 
 <template name="task">
 	<span type="submit" value="Remove" class="remove-task glyphicon glyphicon-remove pull-right text-danger"></span>
-	<h2>{{title}} - Due {{dueDate}}</h2>
+	<h2>{{title}}</h2>
 	<select class="task-status">
 		<option selected="{{isEqual status 'In progress'}}">In progress</option>
 		<option selected="{{isEqual status 'At risk'}}">At risk</option>

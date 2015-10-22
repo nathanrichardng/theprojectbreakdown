@@ -1,1 +1,54 @@
 /* CSS declarations go here */
+.status.inProgress {
+	background-color: #E3E3E3;
+}
+
+.status.atRisk {
+	background-color: #EBBD3F;
+}
+
+.status.complete {
+	background-color: #A9F5AA;
+}
+
+.status.pendingInfo {
+	background-color: #9EE1F0;
+}
+
+.status.list-group-item a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.status.list-group-item:hover {
+	background-color: #3DE9F5;
+	box-shadow: 0px 0px 15px #333;
+	z-index: 10;
+	border-color: transparent;
+}
+
+.sent-requests {
+	padding: 0px 15px;
+	margin-top: 20px;
+}
+
+.sent-request {
+	box-shadow: 5px 5px 15px #333;
+}
+
+.panel-date .panel-heading {
+	background-color: #666666;
+	color: #fff;
+}
+
+.panel-pm .panel-heading {
+	background-color: #A19FA0;
+}
+
+.panel-description .panel-heading {
+	background-color: #e1e1e1;
+}
+
+.panel {
+	box-shadow: 5px 5px 10px #e1e1e1;
+}

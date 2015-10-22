@@ -12,7 +12,8 @@ if (Meteor.isClient) {
       console.log(this);
       var userId = this.toString();
       //change this to return user name once profiles are set up
-      return Meteor.users.findOne({_id: userId}).emails[0].address;
+      var member = Meteor.users.findOne({_id: userId});
+      return member.profile.firstName + " " + member.profile.lastName;
     }
   })
 }

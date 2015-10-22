@@ -28,9 +28,9 @@
 	<select multiple name="members" class="form-control">
     	{{#each colleagues}}
     		<option value="{{_id}}">
-        		{{#each emails}}
-					{{address}}
-        		{{/each}}
+        		{{#with profile}}
+        			{{firstName}} {{lastName}}
+        		{{/with}}
     		</option>
     	{{/each}}
     </select>

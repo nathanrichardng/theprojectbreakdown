@@ -128,11 +128,11 @@ Schema.FriendRequests = new SimpleSchema({
 Schema.UserProfile = new SimpleSchema({
     firstName: {
         type: String,
-        optional: true
+        optional: false
     },
     lastName: {
         type: String,
-        optional: true
+        optional: false
     },
     birthday: {
         type: Date,
@@ -145,7 +145,7 @@ Schema.UserProfile = new SimpleSchema({
     },
     organization : {
         type: String,
-        optional: true
+        optional: false
     },
     bio: {
         type: String,

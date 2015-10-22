@@ -9,8 +9,10 @@ Router.route('/Projects/:ProjectId', {
 		return Projects.findOne({ _id:projectId }, {
 	        transform: function(doc) {
 	          var newDoc = doc;
+	          var pm = Meteor.users.findOne({ _id: doc.pm });
 	          newDoc.dueDate = newDoc.dueDate.toDateString();
-	          return doc;
+	          newDoc.pm = pm.profile.firstName + " " + pm.profile.lastName;
+	          return newDoc;
 	        }
       	});
 	}
