@@ -48,7 +48,29 @@
 	</select>
 	<hr>
 	<div class="col-md-12 well">
-		<p>{{description}}</p>
+		<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#projectInfo" aria-expanded="false" aria-controls="projectInfo">
+		  Task Info
+		</button>
+	  	<div class="collapse" id="projectInfo">
+			<div class="panel panel-info">
+			  <div class="panel-heading">Target date</div>
+			  <div class="panel-body">
+			    {{dueDate}}
+			  </div>
+			</div>
+			<div class="panel panel-success">
+			  <div class="panel-heading">Task Owner</div>
+			  <div class="panel-body">
+			    {{owner}}
+			  </div>
+			</div>
+			<div class="panel panel-warning">
+			  <div class="panel-heading">Task description</div>
+			  <div class="panel-body">
+			    {{description}}
+			  </div>
+			</div>
+		</div>
 	</div>
 	<div class="col-md-6">
 		<h3>Sub Tasks</h3>

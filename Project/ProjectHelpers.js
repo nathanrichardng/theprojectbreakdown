@@ -57,10 +57,17 @@ if (Meteor.isClient) {
   			dueDate: event.target.dueDate.value
   		} 
   		
-  		Meteor.call('addProject', newProject);
-
-  		event.target.title.value = "";
-  		event.target.description.value = "";
+  		Meteor.call('addProject', newProject, function(error, result) {
+        if(error) {
+          //change this to alerts collection later
+          window.alert(error.reason);
+        }
+        if(!error) {
+          event.target.title.value = "";
+          event.target.description.value = "";
+          event.target.dueDate.value = "";
+        }
+      });
   	}
   });
 

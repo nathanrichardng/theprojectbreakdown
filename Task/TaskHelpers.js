@@ -12,10 +12,17 @@ if (Meteor.isClient) {
         project: this._id
       };
 
-  		Meteor.call('addCoreTask', newCoreTask);
-
-  		event.target.title.value = "";
-  		event.target.description.value = "";
+  		Meteor.call('addCoreTask', newCoreTask, function(error, result) {
+        if(error) {
+          //change this to alerts collection later
+          window.alert(error.reason);
+        }
+        if(!error) {
+          event.target.title.value = "";
+          event.target.description.value = "";
+          event.target.dueDate.value = "";
+        }
+      });
   	}
   });
 
@@ -65,10 +72,17 @@ if (Meteor.isClient) {
         owner: Meteor.userId(),
         parentTask: this._id
       };
-      Meteor.call('addSubTask', newSubTask);
-
-      event.target.title.value = "";
-      event.target.description.value = "";
+      Meteor.call('addSubTask', newSubTask, function(error, result) {
+        if(error) {
+          //change this to alerts collection later
+          window.alert(error.reason);
+        }
+        if(!error) {
+          event.target.title.value = "";
+          event.target.description.value = "";
+          event.target.dueDate.value = "";
+        }
+      });
     }
   });
 

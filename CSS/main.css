@@ -34,3 +34,20 @@
 .sent-request {
 	box-shadow: 5px 5px 15px #333;
 }
+
+.panel-date .panel-heading {
+	background-color: #666666;
+	color: #fff;
+}
+
+.panel-pm .panel-heading {
+	background-color: #A19FA0;
+}
+
+.panel-description .panel-heading {
+	background-color: #e1e1e1;
+}
+
+.panel {
+	box-shadow: 5px 5px 10px #e1e1e1;
+}
