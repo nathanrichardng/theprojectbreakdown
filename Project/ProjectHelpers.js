@@ -74,7 +74,10 @@ if (Meteor.isClient) {
   Template.projectProgressBar.helpers({
     percentComplete: function() {
       var projectId = Template.parentData()._id;
-      return Tasks.find({ project: projectId, status: 'Complete', removed: false, numberOfSubTasks: 0 }).count() / Tasks.find({ project: projectId, removed: false, numberOfSubTasks: 0  }).count() * 100;
+      var completedTasks = Tasks.find({ project: projectId, status: 'Complete', removed: false, numberOfSubTasks: 0 }).count();
+      var totalTasks = Tasks.find({ project: projectId, removed: false, numberOfSubTasks: 0  }).count();
+      var percentComplete = (100*completedTasks/totalTasks).toFixed(1);
+      return percentComplete;
     }
   })
 }
