@@ -11,15 +11,15 @@ if(Meteor.isClient) {
 
 	    if (email) {
 
-	      Accounts.forgotPassword({email: email}, function(err) {
-	        if (err) {
-	          if (err.message === 'User not found [403]') {
-	            console.log('This email does not exist.');
-	          } else {
-	            console.log('We are sorry but something went wrong.');
-	          }
-	        } else {
-	          console.log('Email Sent. Check your mailbox.');
+	      Accounts.forgotPassword({email: email}, function(error) {
+	        if (error) {
+	          Session.set("loginMenuError", error.reason);
+	          Session.set("loginMenuMessage", false);
+	        } 
+	        else {
+	          Session.set("loginMenuMessage", "Email sent. Please check your mailbox.");
+	          Session.set("loginMenuError", false);
+	          e.target.forgotPasswordEmail.value = "";
 	        }
 	      });
 

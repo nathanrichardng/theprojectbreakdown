@@ -17,14 +17,18 @@
 				{{else}}
 					{{#if registering}}
 						{{> registrationForm}}
-
 						<form><button class="btn btn-warning col-xs-12 cancel-registration">Cancel</button></form>
 					{{else}}
-						{{> loginForm}}
-						<form>
-							<a class="pull-left begin-forgot-password">Forgot Password?</a>
-							<a class="pull-right begin-registration">Sign Up</a>
-						</form>
+						{{#if resettingPassword}}
+							{{> ForgotPassword}}
+							<form><button class="btn btn-warning col-xs-12 cancel-forgot-password">Cancel</button></form>
+						{{else}}
+							{{> loginForm}}
+							<form>
+								<a class="pull-left begin-forgot-password">Forgot Password?</a>
+								<a class="pull-right begin-registration">Sign Up</a>
+							</form>
+						{{/if}}
 					{{/if}}
 				{{/if}}
 			</div>

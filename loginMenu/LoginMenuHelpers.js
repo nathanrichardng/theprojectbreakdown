@@ -8,7 +8,7 @@ if (Meteor.isClient) {
         text = currentUser.profile.firstName + " " + currentUser.profile.lastName;
       }
       else {
-        text = "Sign up / Register";
+        text = "Sign in / Register";
       }
       return text;
     },
@@ -23,6 +23,9 @@ if (Meteor.isClient) {
     },
     registering: function() {
       return Session.get("registering");
+    },
+    resettingPassword: function() {
+      return Session.get("resettingPassword");
     }
   });
 
@@ -40,7 +43,12 @@ if (Meteor.isClient) {
       Session.set("registering", false);
     },
     "click .begin-forgot-password": function(event) {
-      //implement logic to show forgotPassword template
+      event.preventDefault();
+      Session.set("resettingPassword", true);
+    },
+    "click .cancel-forgot-password": function(event) {
+      event.preventDefault();
+      Session.set("resettingPassword", false);
     }
-  })
+  });
 }
