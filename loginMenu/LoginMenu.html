@@ -1,0 +1,33 @@
+<template name="loginMenu">
+	<ul class="nav navbar-nav navbar-right">	 
+		<li id="login-dropdown-list" class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				{{user}}
+				<b class="caret"></b>
+			</a>
+			<div class="dropdown-menu">
+				{{#if loginMenuMessage}}
+					<h4 class="alert alert-success">{{loginMenuMessage}}</h4>
+				{{/if}}
+				{{#if loginMenuError}}
+					<h4 class="alert alert-danger">{{loginMenuError}}</h4>
+				{{/if}}
+				{{#if loggedIn}}
+					{{> loggedInActions}}
+				{{else}}
+					{{#if registering}}
+						{{> registrationForm}}
+
+						<form><button class="btn btn-warning col-xs-12 cancel-registration">Cancel</button></form>
+					{{else}}
+						{{> loginForm}}
+						<form>
+							<a class="pull-left begin-forgot-password">Forgot Password?</a>
+							<a class="pull-right begin-registration">Sign Up</a>
+						</form>
+					{{/if}}
+				{{/if}}
+			</div>
+		</li>
+    </ul>
+</template>

@@ -1,0 +1,22 @@
+<template name="loggedInActions">
+	{{#if changingPassword}}
+		<form class="change-user-password">
+			<div class="input-group col-xs-12">
+				<input type="password" name="currentPassword" placeholder="Curent Password" class="form-control" />
+			</div>
+			<div class="input-group col-xs-12">
+				<input type="password" name="newPassword" class="form-control" placeholder="New Password" />
+			</div>
+			<div class="input-group col-xs-12">
+				<input type="password" name="confirmPassword" class="form-control" placeholder="Confirm New Password" />
+			</div>
+			<div class="input-group col-xs-12">
+				<button type="submit" class="btn btn-success col-xs-12" value="Update Password">Update Password</button>
+			</div>
+			<button class="btn btn-warning col-xs-12 cancel-change-password">Cancel</button>
+	    </form>
+    {{else}}
+    	<form><button class="btn btn-default col-xs-12 change-password-button">Change Password</button></form>
+		<button class="btn btn-primary logout-user col-xs-12">Log Out</button>
+	{{/if}}
+</template>

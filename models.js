@@ -204,13 +204,6 @@ Schema.User = new SimpleSchema({
         optional: true,
         blackbox: true
     },
-    // Option 2: [String] type
-    // If you are sure you will never need to use role groups, then
-    // you can specify [String] as the type
-    roles: {
-        type: [String],
-        optional: true
-    },
     colleagues: {
         type: [Schema.User],
         autoValue: function() {

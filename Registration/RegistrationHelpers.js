@@ -14,15 +14,14 @@ if (Meteor.isClient) {
       }
       Accounts.createUser(user, function(error){
         if(error){
-          
+          Session.set("loginMenuError", error.reason);
         }
         else {
-          console.log(user);
+          $('.dropdown-toggle').dropdown('toggle');
+          Session.set("registering", false);
           Router.go('/projects');
         }
       });
     }
   });
-
-  //need to make a template and functions to log in/send password reset
 }
