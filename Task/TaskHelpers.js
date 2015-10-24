@@ -129,7 +129,22 @@ if (Meteor.isClient) {
   Template.task.events({
     "click .remove-task": function(event) {
       var taskId = this._id;
-      Meteor.call('removeTask', taskId);
+      var project = this.project;
+      var parentTask = this.parentTask;
+      Meteor.call('removeTask', taskId, function(error, result) {
+        if(error) {
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
+        }
+        else {
+          if(parentTask) {
+            Router.go('/tasks/'+parentTask);
+          }
+          else {
+            Router.go('/projects/'+project);
+          }
+        }
+      });
     },
     "click .remove-member": function(event) {
       event.preventDefault();

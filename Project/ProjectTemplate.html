@@ -3,7 +3,7 @@
 		<div class="col-md-7">
 			{{> addProjectForm}}
 		</div>
-		<div class="col-md-5 list-group">
+		<div class="col-md-5">
 			<h3>Projects: </h3>
 			{{#each projects}}
 				{{> projectQuickInfo}}
@@ -38,7 +38,7 @@
 			<textarea class="form-control" name="description" placeholder="Project Description" rows="5"></textarea>
 		</div>
 		<div class="input-group col-xs-12">
-			<button type="submit" class="btn btn-info col-md-12" value="Add Project">Add Project</button>
+			<button type="submit" class="btn btn-info col-xs-12" value="Add Project">Add Project</button>
 		</div>
     </form>
 </template>
@@ -128,7 +128,7 @@
 			{{> selectColleague}}
 		</div>
 		<div class="input-group col-xs-12">
-			<button type="submit" class="btn btn-success col-md-12" value="Add Project">Update Project</button>
+			<button type="submit" class="btn btn-success col-xs-12" value="Add Project">Update Project</button>
 		</div>
     </form>
 </template>

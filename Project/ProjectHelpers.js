@@ -16,7 +16,15 @@ if (Meteor.isClient) {
     "click .remove-project": function(event) {
       var projectId = this._id;
       console.log(projectId);
-      Meteor.call('removeProject', projectId);
+      Meteor.call('removeProject', projectId, function(error, result) {
+        if(error) {
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
+        }
+        else {
+          Router.go("/projects");
+        }
+      });
     },
     "click .remove-member": function(event) {
       event.preventDefault();
@@ -60,7 +68,8 @@ if (Meteor.isClient) {
   		Meteor.call('addProject', newProject, function(error, result) {
         if(error) {
           //change this to alerts collection later
-          window.alert(error.reason);
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
         }
         if(!error) {
           event.target.title.value = "";
