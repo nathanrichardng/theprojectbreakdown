@@ -71,6 +71,37 @@ if (Meteor.isClient) {
   	}
   });
 
+  Template.updateProjectForm.events({
+    "submit .update-project": function(event) {
+      event.preventDefault();
+      var projectId = this._id;
+      console.log(this._id);
+      var updatedProject = {
+        title: event.target.updateTitle.value,
+        description: event.target.updateDescription.value,
+        dueDate: Date.parse(event.target.updateDueDate.value),
+        pm: event.target.member.value,
+        _id: projectId
+      };
+
+      console.log(updatedProject); 
+      
+      Meteor.call('updateProject', updatedProject, function(error, result) {
+        if(error) {
+          //change this to alerts collection later
+          console.log(error.reason);
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
+        }
+        if(!error) {
+          Session.set("message", "Project Updated");
+          console.log("Project Updated");
+          $('#message-modal').modal('show');
+        }
+      });
+    }
+  });
+
   Template.projectProgressBar.helpers({
     percentComplete: function() {
       var projectId = Template.parentData()._id;

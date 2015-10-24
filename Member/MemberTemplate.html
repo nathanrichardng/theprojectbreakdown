@@ -36,6 +36,18 @@
     </select>
 </template>
 
+<template name="selectColleague">
+	<select name="member" class="form-control">
+    	{{#each colleagues}}
+    		<option value="{{_id}}">
+        		{{#with profile}}
+        			{{firstName}} {{lastName}}
+        		{{/with}}
+    		</option>
+    	{{/each}}
+    </select>
+</template>
+
 <template name="member">
 	<div class="list-group-item">
 		<span type="submit" value="Remove" class="remove-member glyphicon glyphicon-remove pull-right text-danger"></span>

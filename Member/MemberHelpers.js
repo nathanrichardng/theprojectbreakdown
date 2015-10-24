@@ -7,6 +7,17 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.selectColleague.helpers({
+    colleagues: function() {
+      console.log(Meteor.user());
+      return Meteor.users.find({ $or: [ 
+          { _id: { $in: Meteor.user().colleagues } },
+          { _id: Meteor.userId() }
+        ]
+      });
+    }
+  });
+
   Template.member.helpers({
     member: function() {
       console.log(this);

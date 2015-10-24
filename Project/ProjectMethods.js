@@ -21,6 +21,23 @@ if (Meteor.isServer) {
           $set: { removed: true }
         });
       },
+      'updateProject': function(project){
+          var currentUser = Meteor.userId();
+          var oldProject = Projects.findOne({ _id: project._id });
+          if (oldProject.pm == currentUser) {
+            Projects.update({ 
+              _id: project._id 
+            }, 
+            {
+              $set: {
+                title: project.title,
+                description: project.description,
+                dueDate: project.dueDate,
+                pm: project.pm
+              }
+            });
+          } 
+      },
       'addMemberToProject': function(projectId, memberId) {
         var isColleague = Meteor.users.findOne({
           _id: this.userId,

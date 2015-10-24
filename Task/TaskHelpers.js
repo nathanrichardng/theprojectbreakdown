@@ -15,7 +15,8 @@ if (Meteor.isClient) {
   		Meteor.call('addCoreTask', newCoreTask, function(error, result) {
         if(error) {
           //change this to alerts collection later
-          window.alert(error.reason);
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
         }
         if(!error) {
           event.target.title.value = "";
@@ -75,7 +76,8 @@ if (Meteor.isClient) {
       Meteor.call('addSubTask', newSubTask, function(error, result) {
         if(error) {
           //change this to alerts collection later
-          window.alert(error.reason);
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
         }
         if(!error) {
           event.target.title.value = "";
@@ -88,7 +90,17 @@ if (Meteor.isClient) {
 
   Template.subTasks.helpers({
     subTasks: function() {
-      return Tasks.find({ parentTask: this._id});
+      return Tasks.find({ parentTask: this._id}, {
+          transform: function(doc) {
+            var newDoc = doc;
+            var owner = Meteor.users.findOne({ _id: doc.owner });
+
+            newDoc.dueDate = newDoc.dueDate.toDateString();
+            newDoc.owner = owner.profile.firstName + " " + owner.profile.lastName;
+            
+            return newDoc;
+          }
+      });
     }
   });
 
@@ -144,6 +156,4 @@ if (Meteor.isClient) {
       Meteor.call('updateTaskStatus', taskId, newStatus);
     }
   });
-
-  //add helper and template to add/remove members
 }

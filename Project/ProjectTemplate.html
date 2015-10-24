@@ -54,9 +54,15 @@
 	</select>
 	<hr>
 	<div class="col-md-12 well">
-		<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#projectInfo" aria-expanded="false" aria-controls="projectInfo">
-		  Project Info
-		</button>
+		<div>
+			<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#projectInfo" aria-expanded="false" aria-controls="projectInfo">
+			  Project Info
+			</button>
+			<button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#projectUpdate" aria-expanded="false" aria-controls="projectUpdate">
+			  Update Project
+			</button>
+		</div>
+		
 	  	<div class="collapse" id="projectInfo">
 			<div class="panel panel-info">
 			  <div class="panel-heading">Target date</div>
@@ -76,6 +82,9 @@
 			    {{description}}
 			  </div>
 			</div>
+		</div>
+	  	<div class="collapse" id="projectUpdate">
+			{{> updateProjectForm}}
 		</div>
 	</div>
 	<div class="clearfix"></div>
@@ -97,4 +106,29 @@
 	    {{percentComplete}}%
 	  </div>
 	</div>
+</template>
+
+<template name="updateProjectForm">
+	<h3>
+		Update Project:
+	</h3>
+	<form class="update-project">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="updateTitle">Title</span>
+			<input type="text" name="updateTitle" placeholder="New Title" class="form-control" aria-describedby="updateTitle" value="{{title}}" />
+		</div>
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="updateTargetDate">Target Date</span>
+			<input type="date" name="updateDueDate" class="form-control" aria-describedby="updateTargetDate" value="{{toDate dueDate}}">
+		</div>
+		<div class="input-group col-xs-12">
+			<textarea class="form-control" name="updateDescription" placeholder="New Description" rows="5">{{description}}</textarea>
+		</div>
+		<div class="input-group col-xs-12">
+			{{> selectColleague}}
+		</div>
+		<div class="input-group col-xs-12">
+			<button type="submit" class="btn btn-success col-md-12" value="Add Project">Update Project</button>
+		</div>
+    </form>
 </template>

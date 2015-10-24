@@ -16,10 +16,10 @@
           <!--Collapsable area-->
           <div class='collapse navbar-collapse' id='main-nav'>
             <ul class='nav navbar-nav'>
-              <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="/projects"><i class="fa fa-map-marker"></i> Projects</a></li>
-              <li><a href="/friendRequests"><i class="fa fa-calendar-o"></i>Contact requests <span class="badge">{{numberOfFriendRequests}}</span></a></li>
-              <li><a href="/friends"><i class="fa fa-line-chart"></i> Colleagues</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/projects">Projects</a></li>
+              <li><a href="/friendRequests">Contact requests <span class="badge">{{numberOfFriendRequests}}</span></a></li>
+              <li><a href="/friends">Colleagues</a></li>
             </ul>
             {{> loginMenu}}
           </div>
@@ -32,4 +32,36 @@
   <div class='container'>
     {{> yield}}
   </div>
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="message-modal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="alert alert-success">{{message}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="error-modal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="alert alert-danger">{{error}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <footer class='footer'>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom visible-xs">
+      <div class="container">
+        <div class="row">
+          <ul class='nav col-md-12'>
+            <li class="col-xs-3"><a href="/" class="text-center"><i class="fa fa-folder"></i></a></li>
+            <li class="col-xs-3"><a href="/projects" class="text-center"><i class="fa fa-tasks"></i></a></li>
+            <li class="col-xs-3"><a href="/friendRequests" class="text-center"><i class="fa fa-search-plus"></i></a></li>
+            <li class="col-xs-3"><a href="/friends" class="text-center"><i class="fa fa-users"></i></a></li>
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+
+  </footer>
 </template>
