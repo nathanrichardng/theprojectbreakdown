@@ -48,10 +48,15 @@
 	</select>
 	<hr>
 	<div class="col-md-12 well">
-		<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#projectInfo" aria-expanded="false" aria-controls="projectInfo">
-		  Task Info
-		</button>
-	  	<div class="collapse" id="projectInfo">
+		<div>
+			<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#taskInfo" aria-expanded="false" aria-controls="taskInfo">
+			  Task Info
+			</button>
+			<button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#taskUpdate" aria-expanded="false" aria-controls="taskUpdate">
+			  Update Task
+			</button>
+		</div>
+	  	<div class="collapse" id="taskInfo">
 			<div class="panel panel-info">
 			  <div class="panel-heading">Target date</div>
 			  <div class="panel-body">
@@ -70,6 +75,9 @@
 			    {{description}}
 			  </div>
 			</div>
+		</div>
+		<div class="collapse" id="taskUpdate">
+			{{> updateTaskForm}}
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -120,4 +128,27 @@
 			<p class="list-group-item-text">Due {{dueDate}}</p>
 		</a>
 	</div>
+</template>
+
+<template name="updateTaskForm">
+	<form class="update-task">
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="updatedTaskTitle">Title</span>
+			<input type="text" name="updatedTaskTitle" placeholder="What is the task called?" class="form-control" aria-describedby="updatedTaskTitle" value="{{title}}"/>
+		</div>
+        <div class="input-group col-xs-12">
+			<span class="input-group-addon" id="updatedTaskDescription">Description</span>
+			<input type="text" name="updatedTaskDescription" placeholder="Short description of task" class="form-control" aria-describedby="updatedTaskDescription" value="{{description}}" />
+		</div>
+		<div class="input-group col-xs-12">
+			<span class="input-group-addon" id="updatedTaskDueDate">Completion Date</span>
+			<input type="date" name="updatedTaskDueDate" class="form-control" aria-describedby="updatedTaskDueDate" value="{{toDate dueDate}}">
+		</div>
+		<div class="input-group col-xs-12" value="{{owner}}">
+			{{> selectColleague}}
+		</div>
+        <div class="input-group col-xs-12">
+        	<input type="submit" class="btn btn-success col-xs-12">
+        </div>
+    </form>
 </template>

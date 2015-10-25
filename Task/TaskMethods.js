@@ -100,6 +100,26 @@ if (Meteor.isServer) {
             $set: { status: newStatus }
           });
         }
+      },
+      'updateTask': function(task){
+          var currentUser = Meteor.userId();
+          var oldTask = Tasks.findOne({ _id: task._id });
+          var projectId = oldTask.project;
+          var project = Projects.findOne({ _id: projectId});
+
+          if ( (project.pm == currentUser) || (oldTask.owner == currentUser) ) {
+            Tasks.update({ 
+              _id: task._id 
+            }, 
+            {
+              $set: {
+                title: task.title,
+                description: task.description,
+                dueDate: task.dueDate,
+                owner: task.owner
+              }
+            });
+          } 
       }
   });
 

@@ -171,4 +171,35 @@ if (Meteor.isClient) {
       Meteor.call('updateTaskStatus', taskId, newStatus);
     }
   });
+
+  Template.updateTaskForm.events({
+    "submit .update-task": function(event) {
+      event.preventDefault();
+      var taskId = this._id;
+      console.log(this._id);
+      var updatedTask = {
+        title: event.target.updatedTaskTitle.value,
+        description: event.target.updatedTaskDescription.value,
+        dueDate: Date.parse(event.target.updatedTaskDueDate.value),
+        owner: event.target.member.value,
+        _id: taskId
+      };
+
+      console.log(updatedTask); 
+      
+      Meteor.call('updateTask', updatedTask, function(error, result) {
+        if(error) {
+          //change this to alerts collection later
+          console.log(error.reason);
+          Session.set("error", error.reason);
+          $('#error-modal').modal('show');
+        }
+        if(!error) {
+          Session.set("message", "Task Updated");
+          console.log("Task Updated");
+          $('#message-modal').modal('show');
+        }
+      });
+    }
+  });
 }
