@@ -31,6 +31,7 @@ if (Meteor.isClient) {
 
   Template.loginMenu.events({
     "click .dropdown-toggle": function(event) {
+      console.log("fired event");
       Session.set("loginMenuMessage", false);
       Session.set("loginMenuError", false);
     },

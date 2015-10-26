@@ -12,6 +12,7 @@ if (Meteor.isClient) {
           Session.set("loginMenuMessage", false);
         }
         else {
+          Session.set("loginMenuError", false);
           $('.dropdown-toggle').dropdown('toggle');
           Router.go('/projects');
         }

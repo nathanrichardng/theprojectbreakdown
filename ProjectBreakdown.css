@@ -68,4 +68,8 @@
 	.jumbotron {
 		text-align: center;
 	}
+
+	.jumbotron h1 {
+		font-size: 48px;
+	}
 }
