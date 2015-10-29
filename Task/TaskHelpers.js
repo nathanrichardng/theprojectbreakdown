@@ -4,7 +4,6 @@ if (Meteor.isClient) {
   Template.addCoreTaskForm.events({
   	"submit .add-core-task": function(event) {
   		event.preventDefault();
-
       var newCoreTask = {
         title: event.target.title.value,
         description: event.target.description.value,
@@ -32,8 +31,9 @@ if (Meteor.isClient) {
       return Tasks.find({ parentTask: null, project: this._id },{
         transform: function(doc) {
           var newDoc = doc;
-          newDoc.dueDate = newDoc.dueDate.toDateString();
-          return doc;
+          var dueDate = new Date(newDoc.dueDate.getTime() + newDoc.dueDate.getTimezoneOffset()*60000);
+          newDoc.dueDate = dueDate.toDateString();
+          return newDoc;
         }
       });
     }
@@ -94,8 +94,9 @@ if (Meteor.isClient) {
           transform: function(doc) {
             var newDoc = doc;
             var owner = Meteor.users.findOne({ _id: doc.owner });
-
-            newDoc.dueDate = newDoc.dueDate.toDateString();
+            var dueDate = new Date(newDoc.dueDate.getTime() + newDoc.dueDate.getTimezoneOffset()*60000);
+            
+            newDoc.dueDate = dueDate.toDateString();
             newDoc.owner = owner.profile.firstName + " " + owner.profile.lastName;
             
             return newDoc;

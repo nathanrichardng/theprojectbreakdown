@@ -6,8 +6,9 @@ Router.route('/Tasks/:TaskId', {
 	        transform: function(doc) {
 	          var newDoc = doc;
 	          var owner = Meteor.users.findOne({ _id: doc.owner });
-
-	          newDoc.dueDate = newDoc.dueDate.toDateString();
+	          var dueDate = new Date(newDoc.dueDate.getTime() + newDoc.dueDate.getTimezoneOffset()*60000);
+	          
+          	  newDoc.dueDate = dueDate.toDateString();
 	          newDoc.owner = owner.profile.firstName + " " + owner.profile.lastName;
 	          
 	          return newDoc;

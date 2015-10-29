@@ -5,7 +5,9 @@ if (Meteor.isClient) {
     	return Projects.find({}, {
         transform: function(doc) {
           var newDoc = doc;
-          newDoc.dueDate = newDoc.dueDate.toDateString();
+          //account for timezone
+          var dueDate = new Date(newDoc.dueDate.getTime() + newDoc.dueDate.getTimezoneOffset()*60000);
+          newDoc.dueDate = dueDate.toDateString();
           return doc;
         }
       });
@@ -59,6 +61,7 @@ if (Meteor.isClient) {
   Template.addProjectForm.events({
   	"submit .add-project": function(event) {
   		event.preventDefault();
+      console.log(event.target.dueDate.value);
   		var newProject = {
   			title: event.target.title.value,
   			description: event.target.description.value,
