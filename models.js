@@ -15,6 +15,7 @@ Schema.Task = new SimpleSchema({
     description: {
         type: String,
         label: "Description",
+        optional: true,
         max: 1000
     },
     members: {
@@ -31,7 +32,7 @@ Schema.Task = new SimpleSchema({
     },
     parentTask: {
         type: Schema.Task,
-        optional:true
+        optional: true
     },
     project: {
         type: Schema.Project
@@ -73,6 +74,7 @@ Schema.Project = new SimpleSchema({
     description: {
         type: String,
         label: "Description",
+        optional: true,
         max: 1000
     },
     members: {
